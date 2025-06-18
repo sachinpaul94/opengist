@@ -62,6 +62,8 @@ RUN apk update && \
     musl-dev \
     libstdc++
 
+COPY --from=base /usr/local/bin/gitleaks /usr/local/bin/gitleaks
+
 RUN addgroup -S opengist && \
     adduser -S -G opengist -s /bin/ash -g 'Opengist User' opengist
 
