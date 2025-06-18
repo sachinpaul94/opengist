@@ -6,9 +6,13 @@ import (
 	"github.com/thomiceli/opengist/internal/i18n"
 	"github.com/thomiceli/opengist/internal/validator"
 	"github.com/thomiceli/opengist/internal/web/context"
+	"github.com/rs/zerolog/log"
 	"net/url"
 	"strconv"
 	"strings"
+	"os"
+	"os/exec"
+	"fmt"
 )
 
 func Create(ctx *context.Context) error {
@@ -116,6 +120,41 @@ func ProcessCreate(ctx *context.Context) error {
 		}
 
 		gist.PreviewFilename = dto.Files[0].Filename
+
+		// Create a unique temp directory
+		tmpDir, err := os.MkdirTemp("", "gistscan-*")
+		if err != nil {
+			log.Printf("❌ Failed to create temp dir for Gitleaks: %v", err)
+			return ctx.ErrorRes(500, "Error creating temp directory for Gitleaks", err)
+		}
+		defer os.RemoveAll(tmpDir) // clean up after scan
+
+		// Write content to a temp file
+		filePath := fmt.Sprintf("%s/%s", tmpDir, gist.PreviewFilename)
+		err = os.WriteFile(filePath, []byte(dto.Files[0].Content), 0644)
+		if err != nil {
+			log.Printf("❌ Failed to write temp file for Gitleaks: %v", err)
+			return ctx.ErrorRes(500, "Error writing temp file for Gitleaks", err)
+		}
+
+		// Run gitleaks CLI scan
+		cmd := exec.Command("gitleaks", "detect", "--source", tmpDir, "--no-git", "--no-banner", "--redact")
+		output, err := cmd.CombinedOutput()
+		outputStr := string(output)
+
+		if err != nil {
+			// Gitleaks returns exit code 1 when leaks are found (not a crash)
+			if _, ok := err.(*exec.ExitError); ok {
+				log.Printf("🚨 Gitleaks detected sensitive content:\n%s", outputStr)
+				return ctx.ErrorRes(400, "Gist contains sensitive information", fmt.Errorf("Gitleaks detected sensitive content: %s", outputStr))
+			}
+
+			// Actual execution error
+			log.Printf("❌ Gitleaks execution error: %v\n%s", err, outputStr)
+			return ctx.ErrorRes(500, "Error executing Gitleaks", err)
+		}
+
+		log.Printf("✅ Gitleaks scan passed cleanly:\n%s", outputStr)
 	}
 
 	if err = gist.InitRepository(); err != nil {
