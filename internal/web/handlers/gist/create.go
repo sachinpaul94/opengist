@@ -138,7 +138,7 @@ func ProcessCreate(ctx *context.Context) error {
 		}
 
 		// Run TruffleHog CLI scan
-		cmd := exec.Command("trufflehog", "file", filePath, "--json")
+		cmd := exec.Command("trufflehog", "filesystem", "--path", filePath, "--json")
 		output, err := cmd.CombinedOutput()
 		outputStr := string(output)
 
