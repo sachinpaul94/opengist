@@ -139,8 +139,7 @@ func ProcessCreate(ctx *context.Context) error {
 		}
 
 		// Run TruffleHog CLI scan with updater disabled
-		cmd := exec.Command("trufflehog", "filesystem", filePath, "--json")
-		cmd.Env = append(os.Environ(), "TRUFFLEHOG_DISABLE_UPDATER=true")
+		cmd := exec.Command("trufflehog", "filesystem", filePath, "--json", "--no-update")
 		output, err := cmd.CombinedOutput()
 		outputStr := string(output)
 
