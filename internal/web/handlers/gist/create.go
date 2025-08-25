@@ -137,8 +137,9 @@ func ProcessCreate(ctx *context.Context) error {
 			return ctx.ErrorRes(500, "Error writing temp file for Gitleaks", err)
 		}
 
-		// Run TruffleHog CLI scan
+		// Run TruffleHog CLI scan with updater disabled
 		cmd := exec.Command("trufflehog", "filesystem", filePath, "--json")
+		cmd.Env = append(os.Environ(), "TRUFFLEHOG_DISABLE_UPDATER=true")
 		output, err := cmd.CombinedOutput()
 		outputStr := string(output)
 
