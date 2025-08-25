@@ -137,24 +137,24 @@ func ProcessCreate(ctx *context.Context) error {
 			return ctx.ErrorRes(500, "Error writing temp file for Gitleaks", err)
 		}
 
-		// Run gitleaks CLI scan
-		cmd := exec.Command("gitleaks", "detect", "--source", tmpDir, "--no-git", "--no-banner", "--redact")
+		// Run TruffleHog CLI scan
+		cmd := exec.Command("trufflehog", "file", filePath, "--json")
 		output, err := cmd.CombinedOutput()
 		outputStr := string(output)
 
 		if err != nil {
-			// Gitleaks returns exit code 1 when leaks are found (not a crash)
+			// TruffleHog returns exit code 1 when secrets are found
 			if _, ok := err.(*exec.ExitError); ok {
-				log.Printf("🚨 Gitleaks detected sensitive content:\n%s", outputStr)
-				return ctx.ErrorRes(400, "Gist contains sensitive information", fmt.Errorf("Gitleaks detected sensitive content: %s", outputStr))
+				log.Printf("🚨 TruffleHog detected sensitive content:\n%s", outputStr)
+				return ctx.ErrorRes(400, "Gist contains sensitive information", fmt.Errorf("TruffleHog detected sensitive content: %s", outputStr))
 			}
 
 			// Actual execution error
-			log.Printf("❌ Gitleaks execution error: %v\n%s", err, outputStr)
-			return ctx.ErrorRes(500, "Error executing Gitleaks", err)
+			log.Printf("❌ TruffleHog execution error: %v\n%s", err, outputStr)
+			return ctx.ErrorRes(500, "Error executing TruffleHog", err)
 		}
 
-		log.Printf("✅ Gitleaks scan passed cleanly:\n%s", outputStr)
+		log.Printf("✅ TruffleHog scan passed cleanly:\n%s", outputStr)
 	}
 
 	if err = gist.InitRepository(); err != nil {

@@ -15,10 +15,10 @@ RUN apk update && \
         musl-dev \
         libstdc++
 
-RUN wget https://github.com/gitleaks/gitleaks/releases/download/v8.27.2/gitleaks_8.27.2_linux_x64.tar.gz -O /tmp/gitleaks.tar.gz && \
-    tar -xzf /tmp/gitleaks.tar.gz -C /tmp && \
-    mv /tmp/gitleaks /usr/local/bin/gitleaks && \
-    chmod +x /usr/local/bin/gitleaks
+RUN wget https://github.com/trufflesecurity/trufflehog/releases/latest/download/trufflehog_amd64_linux.tar.gz -O /tmp/trufflehog.tar.gz && \
+    tar -xzf /tmp/trufflehog.tar.gz -C /tmp && \
+    mv /tmp/trufflehog /usr/local/bin/trufflehog && \
+    chmod +x /usr/local/bin/trufflehog
 
 COPY --from=golang:1.23-alpine /usr/local/go/ /usr/local/go/
 ENV PATH="/usr/local/go/bin:${PATH}"
@@ -62,7 +62,7 @@ RUN apk update && \
     musl-dev \
     libstdc++
 
-COPY --from=base /usr/local/bin/gitleaks /usr/local/bin/gitleaks
+COPY --from=base /usr/local/bin/trufflehog /usr/local/bin/trufflehog
 
 RUN addgroup -S opengist && \
     adduser -S -G opengist -s /bin/ash -g 'Opengist User' opengist
