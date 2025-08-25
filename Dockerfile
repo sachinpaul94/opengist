@@ -1,5 +1,9 @@
 FROM alpine:3.19 AS base
 
+
+# Set environment variable globally for the container
+ENV TRUFFLEHOG_DISABLE_UPDATER=true
+
 RUN apk update && \
         apk add --no-cache \
         make \
