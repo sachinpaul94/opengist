@@ -15,7 +15,7 @@ RUN apk update && \
         musl-dev \
         libstdc++
 
-RUN wget https://github.com/trufflesecurity/trufflehog/releases/latest/download/trufflehog_amd64_linux.tar.gz -O /tmp/trufflehog.tar.gz && \
+RUN wget https://github.com/trufflesecurity/trufflehog/releases/download/v3.90.5/trufflehog_3.90.5_linux_amd64.tar.gz -O /tmp/trufflehog.tar.gz && \
     tar -xzf /tmp/trufflehog.tar.gz -C /tmp && \
     mv /tmp/trufflehog /usr/local/bin/trufflehog && \
     chmod +x /usr/local/bin/trufflehog
