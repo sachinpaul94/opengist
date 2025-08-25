@@ -3,8 +3,8 @@ package context
 import (
 	"github.com/gorilla/sessions"
 	"github.com/markbates/goth/gothic"
-	"github.com/thomiceli/opengist/internal/config"
-	"github.com/thomiceli/opengist/internal/session"
+	"github.com/sachinpaul94/opengist/internal/config"
+	"github.com/sachinpaul94/opengist/internal/session"
 	"path/filepath"
 )
 

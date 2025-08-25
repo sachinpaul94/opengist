@@ -2,10 +2,10 @@ package actions
 
 import (
 	"github.com/rs/zerolog/log"
-	"github.com/thomiceli/opengist/internal/config"
-	"github.com/thomiceli/opengist/internal/db"
-	"github.com/thomiceli/opengist/internal/git"
-	"github.com/thomiceli/opengist/internal/index"
+	"github.com/sachinpaul94/opengist/internal/config"
+	"github.com/sachinpaul94/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/git"
+	"github.com/sachinpaul94/opengist/internal/index"
 	"os"
 	"path/filepath"
 	"strings"

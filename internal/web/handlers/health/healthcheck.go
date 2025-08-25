@@ -1,8 +1,8 @@
 package health
 
 import (
-	"github.com/thomiceli/opengist/internal/db"
-	"github.com/thomiceli/opengist/internal/web/context"
+	"github.com/sachinpaul94/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/web/context"
 	"time"
 )
 

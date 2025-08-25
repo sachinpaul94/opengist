@@ -2,7 +2,7 @@ package config
 
 import (
 	"fmt"
-	"github.com/thomiceli/opengist/internal/session"
+	"github.com/sachinpaul94/opengist/internal/session"
 	"io"
 	"net/url"
 	"os"

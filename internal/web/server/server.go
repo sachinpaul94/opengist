@@ -1,13 +1,13 @@
 package server
 
 import (
-	"github.com/thomiceli/opengist/internal/validator"
+	"github.com/sachinpaul94/opengist/internal/validator"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/rs/zerolog/log"
-	"github.com/thomiceli/opengist/internal/config"
-	"github.com/thomiceli/opengist/internal/i18n"
+	"github.com/sachinpaul94/opengist/internal/config"
+	"github.com/sachinpaul94/opengist/internal/i18n"
 )
 
 type Server struct {

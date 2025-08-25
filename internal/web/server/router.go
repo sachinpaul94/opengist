@@ -9,17 +9,17 @@ import (
 	"time"
 
 	"github.com/labstack/echo/v4"
-	"github.com/thomiceli/opengist/internal/config"
-	"github.com/thomiceli/opengist/internal/index"
-	"github.com/thomiceli/opengist/internal/web/context"
-	"github.com/thomiceli/opengist/internal/web/handlers/admin"
-	"github.com/thomiceli/opengist/internal/web/handlers/auth"
-	"github.com/thomiceli/opengist/internal/web/handlers/gist"
-	"github.com/thomiceli/opengist/internal/web/handlers/git"
-	"github.com/thomiceli/opengist/internal/web/handlers/health"
-	"github.com/thomiceli/opengist/internal/web/handlers/metrics"
-	"github.com/thomiceli/opengist/internal/web/handlers/settings"
-	"github.com/thomiceli/opengist/public"
+	"github.com/sachinpaul94/opengist/internal/config"
+	"github.com/sachinpaul94/opengist/internal/index"
+	"github.com/sachinpaul94/opengist/internal/web/context"
+	"github.com/sachinpaul94/opengist/internal/web/handlers/admin"
+	"github.com/sachinpaul94/opengist/internal/web/handlers/auth"
+	"github.com/sachinpaul94/opengist/internal/web/handlers/gist"
+	"github.com/sachinpaul94/opengist/internal/web/handlers/git"
+	"github.com/sachinpaul94/opengist/internal/web/handlers/health"
+	"github.com/sachinpaul94/opengist/internal/web/handlers/metrics"
+	"github.com/sachinpaul94/opengist/internal/web/handlers/settings"
+	"github.com/sachinpaul94/opengist/public"
 )
 
 func (s *Server) registerRoutes() {

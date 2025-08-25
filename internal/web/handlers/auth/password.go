@@ -3,12 +3,12 @@ package auth
 import (
 	"errors"
 	"github.com/rs/zerolog/log"
-	"github.com/thomiceli/opengist/internal/auth/ldap"
-	passwordpkg "github.com/thomiceli/opengist/internal/auth/password"
-	"github.com/thomiceli/opengist/internal/db"
-	"github.com/thomiceli/opengist/internal/i18n"
-	"github.com/thomiceli/opengist/internal/validator"
-	"github.com/thomiceli/opengist/internal/web/context"
+	"github.com/sachinpaul94/opengist/internal/auth/ldap"
+	passwordpkg "github.com/sachinpaul94/opengist/internal/auth/password"
+	"github.com/sachinpaul94/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/i18n"
+	"github.com/sachinpaul94/opengist/internal/validator"
+	"github.com/sachinpaul94/opengist/internal/web/context"
 	"gorm.io/gorm"
 )
 

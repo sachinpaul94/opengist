@@ -1,6 +1,6 @@
 package password
 
-import "github.com/thomiceli/opengist/internal/auth"
+import "github.com/sachinpaul94/opengist/internal/auth"
 
 func HashPassword(code string) (string, error) {
 	return auth.Argon2id.Hash(code)

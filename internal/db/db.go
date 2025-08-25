@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/rs/zerolog/log"
-	"github.com/thomiceli/opengist/internal/config"
+	"github.com/sachinpaul94/opengist/internal/config"
 	"gorm.io/gorm"
 )
 

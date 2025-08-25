@@ -2,7 +2,7 @@ package validator
 
 import (
 	"github.com/go-playground/validator/v10"
-	"github.com/thomiceli/opengist/internal/i18n"
+	"github.com/sachinpaul94/opengist/internal/i18n"
 	"regexp"
 	"strings"
 )

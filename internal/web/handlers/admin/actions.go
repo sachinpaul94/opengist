@@ -1,8 +1,8 @@
 package admin
 
 import (
-	"github.com/thomiceli/opengist/internal/actions"
-	"github.com/thomiceli/opengist/internal/web/context"
+	"github.com/sachinpaul94/opengist/internal/actions"
+	"github.com/sachinpaul94/opengist/internal/web/context"
 )
 
 func AdminSyncReposFromFS(ctx *context.Context) error {

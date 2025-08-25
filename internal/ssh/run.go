@@ -3,8 +3,8 @@ package ssh
 import (
 	"errors"
 	"github.com/rs/zerolog/log"
-	"github.com/thomiceli/opengist/internal/config"
-	"github.com/thomiceli/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/config"
+	"github.com/sachinpaul94/opengist/internal/db"
 	"golang.org/x/crypto/ssh"
 	"gorm.io/gorm"
 	"io"

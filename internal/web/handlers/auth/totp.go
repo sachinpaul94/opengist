@@ -1,9 +1,9 @@
 package auth
 
 import (
-	"github.com/thomiceli/opengist/internal/auth/totp"
-	"github.com/thomiceli/opengist/internal/db"
-	"github.com/thomiceli/opengist/internal/web/context"
+	"github.com/sachinpaul94/opengist/internal/auth/totp"
+	"github.com/sachinpaul94/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/web/context"
 	"net/url"
 )
 

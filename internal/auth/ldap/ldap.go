@@ -3,7 +3,7 @@ package ldap
 import (
 	"fmt"
 	"github.com/go-ldap/ldap/v3"
-	"github.com/thomiceli/opengist/internal/config"
+	"github.com/sachinpaul94/opengist/internal/config"
 )
 
 func Enabled() bool {

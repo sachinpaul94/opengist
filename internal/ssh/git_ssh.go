@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	"github.com/rs/zerolog/log"
-	"github.com/thomiceli/opengist/internal/auth"
-	"github.com/thomiceli/opengist/internal/db"
-	"github.com/thomiceli/opengist/internal/git"
+	"github.com/sachinpaul94/opengist/internal/auth"
+	"github.com/sachinpaul94/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/git"
 	"golang.org/x/crypto/ssh"
 	"gorm.io/gorm"
 )

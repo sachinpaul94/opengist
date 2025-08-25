@@ -1,9 +1,9 @@
 package gist
 
 import (
-	"github.com/thomiceli/opengist/internal/db"
-	"github.com/thomiceli/opengist/internal/web/context"
-	"github.com/thomiceli/opengist/internal/web/handlers"
+	"github.com/sachinpaul94/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/web/context"
+	"github.com/sachinpaul94/opengist/internal/web/handlers"
 )
 
 func Like(ctx *context.Context) error {

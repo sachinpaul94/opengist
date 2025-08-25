@@ -2,7 +2,7 @@ package db
 
 import (
 	"encoding/json"
-	"github.com/thomiceli/opengist/internal/git"
+	"github.com/sachinpaul94/opengist/internal/git"
 	"gorm.io/gorm"
 )
 

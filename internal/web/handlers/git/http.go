@@ -6,10 +6,10 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"github.com/thomiceli/opengist/internal/auth/ldap"
-	"github.com/thomiceli/opengist/internal/auth/password"
-	"github.com/thomiceli/opengist/internal/web/context"
-	"github.com/thomiceli/opengist/internal/web/handlers"
+	"github.com/sachinpaul94/opengist/internal/auth/ldap"
+	"github.com/sachinpaul94/opengist/internal/auth/password"
+	"github.com/sachinpaul94/opengist/internal/web/context"
+	"github.com/sachinpaul94/opengist/internal/web/handlers"
 	"net/http"
 	"os"
 	"os/exec"
@@ -21,9 +21,9 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
-	"github.com/thomiceli/opengist/internal/auth"
-	"github.com/thomiceli/opengist/internal/db"
-	"github.com/thomiceli/opengist/internal/git"
+	"github.com/sachinpaul94/opengist/internal/auth"
+	"github.com/sachinpaul94/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/git"
 	"gorm.io/gorm"
 )
 

@@ -1,9 +1,9 @@
 package gist
 
 import (
-	"github.com/thomiceli/opengist/internal/db"
-	"github.com/thomiceli/opengist/internal/render"
-	"github.com/thomiceli/opengist/internal/web/context"
+	"github.com/sachinpaul94/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/render"
+	"github.com/sachinpaul94/opengist/internal/web/context"
 	"strconv"
 )
 

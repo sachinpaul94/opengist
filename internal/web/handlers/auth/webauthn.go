@@ -3,9 +3,9 @@ package auth
 import (
 	"bytes"
 	gojson "encoding/json"
-	"github.com/thomiceli/opengist/internal/auth/webauthn"
-	"github.com/thomiceli/opengist/internal/db"
-	"github.com/thomiceli/opengist/internal/web/context"
+	"github.com/sachinpaul94/opengist/internal/auth/webauthn"
+	"github.com/sachinpaul94/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/web/context"
 	"io"
 )
 

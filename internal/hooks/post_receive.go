@@ -3,9 +3,9 @@ package hooks
 import (
 	"bufio"
 	"fmt"
-	"github.com/thomiceli/opengist/internal/db"
-	"github.com/thomiceli/opengist/internal/git"
-	validatorpkg "github.com/thomiceli/opengist/internal/validator"
+	"github.com/sachinpaul94/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/git"
+	validatorpkg "github.com/sachinpaul94/opengist/internal/validator"
 	"io"
 	"os"
 	"os/exec"

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/thomiceli/opengist/internal/cli"
+	"github.com/sachinpaul94/opengist/internal/cli"
 	"os"
 )
 

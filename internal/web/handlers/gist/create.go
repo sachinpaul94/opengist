@@ -2,10 +2,11 @@ package gist
 
 import (
 	"github.com/google/uuid"
-	"github.com/thomiceli/opengist/internal/db"
-	"github.com/thomiceli/opengist/internal/i18n"
-	"github.com/thomiceli/opengist/internal/validator"
-	"github.com/thomiceli/opengist/internal/web/context"
+	"github.com/sachinpaul94/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/i18n"
+	"github.com/sachinpaul94/opengist/internal/validator"
+	"github.com/sachinpaul94/opengist/internal/web/context"
+	"github.com/sachinpaul94/opengist/internal/web/handlers"
 	"github.com/rs/zerolog/log"
 	"net/url"
 	"strconv"
@@ -144,15 +145,12 @@ func ProcessCreate(ctx *context.Context) error {
 		outputStr := string(output)
 
 		if err != nil {
-			// TruffleHog returns exit code 1 when secrets are found
-			if _, ok := err.(*exec.ExitError); ok {
-				log.Printf("🚨 TruffleHog detected sensitive content:\n%s", outputStr)
-				return ctx.ErrorRes(400, "Gist contains sensitive information", fmt.Errorf("TruffleHog detected sensitive content: %s", outputStr))
-			}
+			return ctx.ErrorRes(500, "TruffleHog scan error", err)
+		}
 
-			// Actual execution error
-			log.Printf("❌ TruffleHog execution error: %v\n%s", err, outputStr)
-			return ctx.ErrorRes(500, "Error executing TruffleHog", err)
+		if err := handlers.ValidateTruffleHogOutput(output); err != nil {
+			log.Printf("🚨 %v", err)
+			return ctx.ErrorRes(400, "Gist contains sensitive information", err)
 		}
 
 		log.Printf("✅ TruffleHog scan passed cleanly:\n%s", outputStr)

@@ -2,7 +2,7 @@ package test
 
 import (
 	"github.com/stretchr/testify/require"
-	"github.com/thomiceli/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/db"
 	"testing"
 )
 

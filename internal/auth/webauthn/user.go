@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"github.com/go-webauthn/webauthn/protocol"
 	"github.com/go-webauthn/webauthn/webauthn"
-	"github.com/thomiceli/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/db"
 )
 
 type user struct {

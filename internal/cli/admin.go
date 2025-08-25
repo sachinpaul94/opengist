@@ -2,8 +2,8 @@ package cli
 
 import (
 	"fmt"
-	"github.com/thomiceli/opengist/internal/auth/password"
-	"github.com/thomiceli/opengist/internal/db"
+	"github.com/sachinpaul94/opengist/internal/auth/password"
+	"github.com/sachinpaul94/opengist/internal/db"
 	"github.com/urfave/cli/v2"
 )
 

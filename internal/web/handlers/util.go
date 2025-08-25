@@ -10,7 +10,7 @@ import (
 
 	"github.com/gorilla/schema"
 
-	"github.com/thomiceli/opengist/internal/web/context"
+	"github.com/sachinpaul94/opengist/internal/web/context"
 )
 
 func GetPage(ctx *context.Context) int {

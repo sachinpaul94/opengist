@@ -6,10 +6,10 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/thomiceli/opengist/internal/auth"
-	"github.com/thomiceli/opengist/internal/auth/password"
-	ogtotp "github.com/thomiceli/opengist/internal/auth/totp"
-	"github.com/thomiceli/opengist/internal/config"
+	"github.com/sachinpaul94/opengist/internal/auth"
+	"github.com/sachinpaul94/opengist/internal/auth/password"
+	ogtotp "github.com/sachinpaul94/opengist/internal/auth/totp"
+	"github.com/sachinpaul94/opengist/internal/config"
 	"slices"
 )
 
