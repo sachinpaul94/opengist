@@ -1,0 +1,21 @@
+services:
+  opengist:
+    image: opengist-dev:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "6157:6157"
+      - "16157:16157"
+      - "2222:2222"
+    volumes:
+      - .:/opengist
+    networks:
+      - supreme_default
+
+volumes:
+  opengist-data:
+
+networks:
+  supreme_default:
+    driver: bridge
