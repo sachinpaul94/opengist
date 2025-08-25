@@ -145,7 +145,22 @@ func ProcessCreate(ctx *context.Context) error {
 		outputStr := string(output)
 
 		if err != nil {
-			return ctx.ErrorRes(500, "TruffleHog scan error", err)
+			if exitErr, ok := err.(*exec.ExitError); ok && exitErr.ExitCode() == 1 {
+				// TruffleHog found secrets, treat as 400
+				if err := handlers.ValidateTruffleHogOutput(output); err != nil {
+					log.Printf("🚨 %v", err)
+					return ctx.ErrorRes(400, "Gist contains sensitive information", err)
+				}
+			} else {
+				// Other errors (scan failure)
+				return ctx.ErrorRes(500, "TruffleHog scan error", err)
+			}
+		} else {
+			// No error, but still check output for secrets
+			if err := handlers.ValidateTruffleHogOutput(output); err != nil {
+				log.Printf("🚨 %v", err)
+				return ctx.ErrorRes(400, "Gist contains sensitive information", err)
+			}
 		}
 
 		if err := handlers.ValidateTruffleHogOutput(output); err != nil {
