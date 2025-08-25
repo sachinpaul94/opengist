@@ -127,3 +127,5 @@ require (
 	modernc.org/memory v1.9.1 // indirect
 	modernc.org/sqlite v1.37.0 // indirect
 )
+
+replace github.com/thomiceli/opengist => github.com/sachinpaul94/opengist master
