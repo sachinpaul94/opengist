@@ -1,4 +1,4 @@
-module github.com/thomiceli/opengist
+module github.com/sachinpaul94/opengist
 
 go 1.23.0
 
@@ -127,5 +127,3 @@ require (
 	modernc.org/memory v1.9.1 // indirect
 	modernc.org/sqlite v1.37.0 // indirect
 )
-
-replace github.com/thomiceli/opengist => github.com/sachinpaul94/opengist master
