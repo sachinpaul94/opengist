@@ -32,7 +32,7 @@ jobs:
       - name: Install TruffleHog
         run: |
           curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh
-          sudo mv trufflehog /usr/local/bin/
+          sudo mv ./bin/trufflehog /usr/local/bin/
           trufflehog --version
 
       - name: Run Go Tests with Coverage
