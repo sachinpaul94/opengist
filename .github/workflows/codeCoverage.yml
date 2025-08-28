@@ -56,18 +56,21 @@ jobs:
           report-files: |
             coverage.txt
             checkstyle-result.xml
+          metrics: |
+            line
+            checkstyle
           quality-gates: >
+            {
+              "qualityGates": [
                 {
-                  "qualityGates": [
-                    {
-                      "metric": "line",
-                      "threshold": 80.0,
-                      "criticality": "FAILURE"
-                    },
-                    {
-                      "metric": "checkstyle",
-                      "threshold": 70.0,
-                      "criticality": "UNSTABLE"
-                    }
-                  ]
+                  "metric": "line",
+                  "threshold": 80.0,
+                  "criticality": "FAILURE"
+                },
+                {
+                  "metric": "checkstyle",
+                  "threshold": 70.0,
+                  "criticality": "UNSTABLE"
                 }
+              ]
+            }
