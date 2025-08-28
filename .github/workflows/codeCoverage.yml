@@ -28,6 +28,13 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.21'
+      
+      - name: Install TruffleHog
+        run: |
+          curl -sSfL https://github.com/trufflesecurity/trufflehog/releases/latest/download/trufflehog_$(uname -s)_$(uname -m).tar.gz -o trufflehog.tar.gz
+          tar -xzf trufflehog.tar.gz
+          sudo mv trufflehog /usr/local/bin/
+          trufflehog --version
 
       - name: Run Go Tests with Coverage
         run: |
