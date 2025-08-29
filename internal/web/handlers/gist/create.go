@@ -14,6 +14,11 @@ import (
 	"os"
 	"os/exec"
 	"fmt"
+	"context"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func Create(ctx *context.Context) error {
@@ -130,16 +135,42 @@ func ProcessCreate(ctx *context.Context) error {
 		}
 		defer os.RemoveAll(tmpDir) // clean up after scan
 
-		// Write content to a temp file
-		filePath := fmt.Sprintf("%s/%s", tmpDir, gist.PreviewFilename)
-		err = os.WriteFile(filePath, []byte(dto.Files[0].Content), 0644)
+		// Upload content to S3 instead of writing to local filesystem
+		s3Bucket := os.Getenv("S3_BUCKET") // Set your bucket name in env
+		s3Key := fmt.Sprintf("gists/%s/%s", gist.Uuid, gist.PreviewFilename)
+
+		awsCfg, err := config.LoadDefaultConfig(context.Background())
 		if err != nil {
-			log.Printf("❌ Failed to write temp file for Gitleaks: %v", err)
-			return ctx.ErrorRes(500, "Error writing temp file for Gitleaks", err)
+			log.Printf("❌ Failed to load AWS config: %v", err)
+			return ctx.ErrorRes(500, "Error loading AWS config for S3", err)
+		}
+		s3Client := s3.NewFromConfig(awsCfg)
+		_, err = s3Client.PutObject(context.Background(), &s3.PutObjectInput{
+			Bucket: aws.String(s3Bucket),
+			Key:    aws.String(s3Key),
+			Body:   strings.NewReader(dto.Files[0].Content),
+			ContentType: aws.String("text/plain"),
+			ACL:    types.ObjectCannedACLPublicRead, // adjust as needed
+		})
+		if err != nil {
+			log.Printf("❌ Failed to upload file to S3: %v", err)
+			return ctx.ErrorRes(500, "Error uploading file to S3", err)
 		}
 
-		// Run TruffleHog CLI scan with updater disabled
-		cmd := exec.Command("trufflehog", "filesystem", filePath, "--json", "--no-update")
+		// Download file from S3 for TruffleHog scan
+		getObjOut, err := s3Client.GetObject(context.Background(), &s3.GetObjectInput{
+			Bucket: aws.String(s3Bucket),
+			Key:    aws.String(s3Key),
+		})
+		if err != nil {
+			log.Printf("❌ Failed to download file from S3 for scan: %v", err)
+			return ctx.ErrorRes(500, "Error downloading file from S3 for scan", err)
+		}
+		defer getObjOut.Body.Close()
+
+		// Run TruffleHog CLI scan with updater disabled, using stdin
+		cmd := exec.Command("trufflehog", "stdin", "--json", "--no-update")
+		cmd.Stdin = getObjOut.Body
 		output, err := cmd.CombinedOutput()
 		outputStr := string(output)
 
