@@ -14,7 +14,7 @@ import (
 	"os"
 	"os/exec"
 	"fmt"
-	"context"
+	stdctx "context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -139,13 +139,13 @@ func ProcessCreate(ctx *context.Context) error {
 		s3Bucket := os.Getenv("S3_BUCKET") // Set your bucket name in env
 		s3Key := fmt.Sprintf("gists/%s/%s", gist.Uuid, gist.PreviewFilename)
 
-		awsCfg, err := config.LoadDefaultConfig(context.Background())
+		awsCfg, err := config.LoadDefaultConfig(stdctx.Background())
 		if err != nil {
 			log.Printf("❌ Failed to load AWS config: %v", err)
 			return ctx.ErrorRes(500, "Error loading AWS config for S3", err)
 		}
 		s3Client := s3.NewFromConfig(awsCfg)
-		_, err = s3Client.PutObject(context.Background(), &s3.PutObjectInput{
+		_, err = s3Client.PutObject(stdctx.Background(), &s3.PutObjectInput{
 			Bucket: aws.String(s3Bucket),
 			Key:    aws.String(s3Key),
 			Body:   strings.NewReader(dto.Files[0].Content),
@@ -158,7 +158,7 @@ func ProcessCreate(ctx *context.Context) error {
 		}
 
 		// Download file from S3 for TruffleHog scan
-		getObjOut, err := s3Client.GetObject(context.Background(), &s3.GetObjectInput{
+		getObjOut, err := s3Client.GetObject(stdctx.Background(), &s3.GetObjectInput{
 			Bucket: aws.String(s3Bucket),
 			Key:    aws.String(s3Key),
 		})
