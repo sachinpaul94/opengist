@@ -19,10 +19,9 @@ RUN apk update && \
         musl-dev \
         libstdc++
 
-RUN wget https://github.com/trufflesecurity/trufflehog/releases/download/v3.90.5/trufflehog_3.90.5_linux_amd64.tar.gz -O /tmp/trufflehog.tar.gz && \
-    tar -xzf /tmp/trufflehog.tar.gz -C /tmp && \
-    mv /tmp/trufflehog /usr/local/bin/trufflehog && \
-    chmod +x /usr/local/bin/trufflehog
+RUN curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh && \
+    mv ./bin/trufflehog /usr/local/bin/ && \
+    trufflehog --version
 
 COPY --from=golang:1.23-alpine /usr/local/go/ /usr/local/go/
 ENV PATH="/usr/local/go/bin:${PATH}"
