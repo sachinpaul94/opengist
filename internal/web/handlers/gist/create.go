@@ -153,6 +153,7 @@ func ProcessCreate(ctx *context.Context) error {
 			ACL:    types.ObjectCannedACLPublicRead, // adjust as needed
 		})
 		if err != nil {
+			log.Printf("s3 Bucket: %s, Key: %s ||| ACL: %s", s3Bucket, s3Key, types.ObjectCannedACLPublicRead)
 			log.Printf("❌ Failed to upload file to S3: %v", err)
 			return ctx.ErrorRes(500, "Error uploading file to S3", err)
 		}
